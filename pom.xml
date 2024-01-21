@@ -61,15 +61,9 @@
       </dependency>
    </dependencies>
    <build>
-      <pluginManagement>
-         <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-         <plugins>
-            <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-            <plugin>
-               <artifactId>maven-clean-plugin</artifactId>
-               <version>3.1.0</version>
-            </plugin>
-            <plugin>
+	   <finalName>${project.artifactId}</finalName>
+	   <plugins>
+		   <plugin>
                <groupId>org.sonatype.central</groupId>
                <artifactId>central-publishing-maven-plugin</artifactId>
                <version>0.1.2</version>
@@ -122,6 +116,16 @@
                   </execution>
                </executions>
             </plugin>
+		</plugins>
+      <pluginManagement>
+         <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+         <plugins>
+            <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+            <plugin>
+               <artifactId>maven-clean-plugin</artifactId>
+               <version>3.1.0</version>
+            </plugin>
+            
             <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
             <plugin>
                <artifactId>maven-resources-plugin</artifactId>
