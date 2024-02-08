@@ -195,6 +195,10 @@ public abstract class AbstractProducer implements ProducerInterface {
 		this.debug = debug;
 	}
 
+	public void setDefaultQueue(Queue queue) {
+        this.defaultQueue = queue;
+    }
+
 	@Override
 	public void sendMessage(BaseMessage message) throws Exception {
 		// TODO Auto-generated method stub

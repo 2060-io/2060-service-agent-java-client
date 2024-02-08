@@ -1,7 +1,5 @@
 package io.twentysixty.sa.client.jms;
 
-import jakarta.jms.ObjectMessage;
-
 import io.twentysixty.sa.client.model.message.BaseMessage;
 
 
