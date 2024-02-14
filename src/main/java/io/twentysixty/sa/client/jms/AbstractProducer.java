@@ -2,6 +2,7 @@ package io.twentysixty.sa.client.jms;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
@@ -33,6 +34,7 @@ public abstract class AbstractProducer implements ProducerInterface {
     
 	
 	private Queue defaultQueue = null;
+	private Map<UUID, Queue> queues;
     
 	private ConnectionFactory connectionFactory;
 	
@@ -131,7 +133,7 @@ public abstract class AbstractProducer implements ProducerInterface {
             	//logger.info("context.createObjectMessage(sms) 2 ");
             	
             	synchronized (producer) {
-            		queue = this.getQueue(context);
+            		queue = this.getQueue(context, sms.getConnectionId());
             		
             		producer.send(queue, message);
                 	message.acknowledge();
@@ -167,16 +169,18 @@ public abstract class AbstractProducer implements ProducerInterface {
     	
     }
     
-    
     private Queue getQueue(JMSContext context) {
-    	
     	if (defaultQueue == null) {
     		defaultQueue = context.createQueue(queueName);
     	}
-    	
-    	
     	return defaultQueue;
-    	
+    }
+    
+    private Queue getQueue(JMSContext context, UUID conn) {
+    	if (queues.get(conn) == null) {
+			queues.put(conn, context.createQueue(queueName));
+    	}
+    	return queues.get(conn);
     }
 
 	public void setExDelay(Long exDelay) {
@@ -194,10 +198,6 @@ public abstract class AbstractProducer implements ProducerInterface {
 	public void setDebug(Boolean debug) {
 		this.debug = debug;
 	}
-
-	public void setDefaultQueue(Queue queue) {
-        this.defaultQueue = queue;
-    }
 
 	@Override
 	public void sendMessage(BaseMessage message) throws Exception {
