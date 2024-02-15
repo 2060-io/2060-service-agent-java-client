@@ -33,7 +33,7 @@ public abstract class AbstractProducer implements ProducerInterface {
 	private Object contextLockObj = new Object();
     
 	
-	private Map<UUID, Queue> queues = new HashMap<UUID, Queue>();
+	private Map<String, Queue> queues = new HashMap<String, Queue>();
     
 	private ConnectionFactory connectionFactory;
 	
@@ -132,7 +132,7 @@ public abstract class AbstractProducer implements ProducerInterface {
             	//logger.info("context.createObjectMessage(sms) 2 ");
             	
             	synchronized (producer) {
-            		queue = this.getQueue(context, sms.getConnectionId());
+            		queue = this.getQueue(context, queueName);
             		
             		producer.send(queue, message);
                 	message.acknowledge();
@@ -168,7 +168,7 @@ public abstract class AbstractProducer implements ProducerInterface {
     	
     }
     
-    private Queue getQueue(JMSContext context, UUID conn) {
+    private Queue getQueue(JMSContext context, String conn) {
 		Queue queue = queues.get(conn);
 		if (queue == null) {
 			queue = context.createQueue(queueName);
