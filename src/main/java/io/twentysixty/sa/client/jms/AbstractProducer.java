@@ -33,8 +33,7 @@ public abstract class AbstractProducer implements ProducerInterface {
 	private Object contextLockObj = new Object();
     
 	
-	private Queue defaultQueue = null;
-	private Map<UUID, Queue> queues;
+	private Map<UUID, Queue> queues = new HashMap<UUID, Queue>();
     
 	private ConnectionFactory connectionFactory;
 	
@@ -169,18 +168,13 @@ public abstract class AbstractProducer implements ProducerInterface {
     	
     }
     
-    private Queue getQueue(JMSContext context) {
-    	if (defaultQueue == null) {
-    		defaultQueue = context.createQueue(queueName);
-    	}
-    	return defaultQueue;
-    }
-    
     private Queue getQueue(JMSContext context, UUID conn) {
-    	if (queues.get(conn) == null) {
-			queues.put(conn, context.createQueue(queueName));
-    	}
-    	return queues.get(conn);
+		Queue queue = queues.get(conn);
+		if (queue == null) {
+			queue = context.createQueue(queueName);
+			queues.put(conn, queue);
+		}
+		return queue;
     }
 
 	public void setExDelay(Long exDelay) {
