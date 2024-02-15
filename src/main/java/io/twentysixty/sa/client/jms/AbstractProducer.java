@@ -2,6 +2,7 @@ package io.twentysixty.sa.client.jms;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSContext;
@@ -32,7 +33,7 @@ public abstract class AbstractProducer implements ProducerInterface {
 	private Object contextLockObj = new Object();
     
 	
-	private Queue defaultQueue = null;
+	private Map<String, Queue> queues = new HashMap<String, Queue>();
     
 	private ConnectionFactory connectionFactory;
 	
@@ -131,7 +132,7 @@ public abstract class AbstractProducer implements ProducerInterface {
             	//logger.info("context.createObjectMessage(sms) 2 ");
             	
             	synchronized (producer) {
-            		queue = this.getQueue(context);
+            		queue = this.getQueue(context, queueName);
             		
             		producer.send(queue, message);
                 	message.acknowledge();
@@ -167,16 +168,13 @@ public abstract class AbstractProducer implements ProducerInterface {
     	
     }
     
-    
-    private Queue getQueue(JMSContext context) {
-    	
-    	if (defaultQueue == null) {
-    		defaultQueue = context.createQueue(queueName);
-    	}
-    	
-    	
-    	return defaultQueue;
-    	
+    private Queue getQueue(JMSContext context, String conn) {
+		Queue queue = queues.get(conn);
+		if (queue == null) {
+			queue = context.createQueue(queueName);
+			queues.put(conn, queue);
+		}
+		return queue;
     }
 
 	public void setExDelay(Long exDelay) {
