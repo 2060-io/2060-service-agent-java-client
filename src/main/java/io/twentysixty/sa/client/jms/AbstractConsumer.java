@@ -24,7 +24,7 @@ import io.twentysixty.sa.client.model.message.BaseMessage;
 import io.twentysixty.sa.client.util.JsonUtil;
 
 
-public class AbstractConsumer implements ConsumerInterface  {
+public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 
     private ConnectionFactory connectionFactory;
 
@@ -174,11 +174,11 @@ public class AbstractConsumer implements ConsumerInterface  {
     		 }
     		 
     		 
-     		logger.info("consumer: running " + uuid);
+     		if (debug) logger.info("consumer: running " + uuid);
 
     		 try  {
     			 
-    			 if (debug) logger.warn("consumer " + queueName + ": create session " + uuid );
+    			 if (debug) logger.info("consumer " + queueName + ": create session " + uuid );
 
 
      			if (context == null) {
@@ -187,13 +187,21 @@ public class AbstractConsumer implements ConsumerInterface  {
      			}
      			
 
-     			if (debug) logger.warn("consumer " + queueName + ": session created " + uuid );
+     			if (debug) logger.info("consumer " + queueName + ": session created " + uuid );
 
      			if (queue == null) {
      				queue = context.createQueue(queueName);
      			}
-     			if (debug) logger.warn("consumer " + queueName + ": create consumer " + uuid );
-     			JMSConsumer consumer = context.createConsumer(queue);
+     			if (debug) logger.info("consumer " + queueName + ": create consumer " + uuid );
+     			JMSConsumer consumer = null;
+     			String messageSelector = getMessageSelector();
+     			
+     			if (messageSelector != null) {
+     				consumer = context.createConsumer(queue, getMessageSelector());
+    		    } else {
+    		    	context.createConsumer(queue);
+    		    }
+     			
      			
 
      			if (debug) logger.info("consumer " + queueName + ": waiting for message... " + uuid);
@@ -238,7 +246,7 @@ public class AbstractConsumer implements ConsumerInterface  {
     									}
             	                	}
         							try {
-        								BaseMessage baseMessage = (BaseMessage) objMsg.getObject();
+        								M baseMessage = (M) objMsg.getObject();
         								this.receiveMessage(baseMessage);
         								//messageResource.sendMessage(baseMessage);
         								
@@ -260,7 +268,7 @@ public class AbstractConsumer implements ConsumerInterface  {
 
         							} 
         						} else {
-        							if (debug) logger.warn("consumer " + queueName + " "+ uuid + " " + (System.currentTimeMillis() - now)+ ": unkown event " + message);
+        							if (debug) logger.info("consumer " + queueName + " "+ uuid + " " + (System.currentTimeMillis() - now)+ ": unkown event " + message);
         							context.commit();
         						}
         	                	
@@ -333,7 +341,7 @@ public class AbstractConsumer implements ConsumerInterface  {
 	}
 
 	@Override
-	public void receiveMessage(BaseMessage message) throws Exception {
+	public void receiveMessage(M message) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -345,7 +353,10 @@ public class AbstractConsumer implements ConsumerInterface  {
 	public void setConnectionFactory(ConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
 	}
-    
+	@Override
+	public String getMessageSelector() {
+		return null;
+	}
     
    
 	
