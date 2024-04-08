@@ -39,10 +39,10 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 
 	private static final Logger logger = Logger.getLogger(AbstractConsumer.class);
 
-	private static Map<UUID,Object> lockObjs = new HashMap<UUID,Object>();
-	private static Map<UUID,Boolean> runnings = new HashMap<UUID,Boolean>();
-	private static Map<UUID,Boolean> starteds = new HashMap<UUID,Boolean>();
-	private static Map<UUID,JMSContext> contexts = new HashMap<UUID,JMSContext>();
+	private Map<UUID,Object> lockObjs = new HashMap<UUID,Object>();
+	private Map<UUID,Boolean> runnings = new HashMap<UUID,Boolean>();
+	private Map<UUID,Boolean> starteds = new HashMap<UUID,Boolean>();
+	private Map<UUID,JMSContext> contexts = new HashMap<UUID,JMSContext>();
 
 
 	private static ExecutorService executor = Executors.newCachedThreadPool();
@@ -81,7 +81,7 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 		}
 
 		for (UUID uuid: keySet) {
-			logger.info("stopConsumers: stopping consumer " + uuid + " for " + queueName);
+			if (debug) logger.info("stopConsumers: stopping consumer " + uuid + " for " + queueName);
 			setStoppedConsumer(uuid);
 
 			JMSContext context = null;
@@ -90,10 +90,18 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 				context = contexts.get(uuid);
 			}
 
-			if (context != null) context.close();
+			
+			
+			if (context != null) {
+				if (debug) logger.info("stopConsumers: closing context " + uuid);
+				context.close();
+			}
 
+			if (debug) logger.info("stopConsumers: closing context done, calling stopConsumer " + uuid);
 			stopConsumer(uuid);
-
+			
+			if (debug) logger.info("stopConsumers: removing lockObj " + uuid);
+			
 			synchronized (lockObjs) {
 				lockObjs.remove(uuid);
 			}
