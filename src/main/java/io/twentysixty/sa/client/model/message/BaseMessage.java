@@ -26,6 +26,7 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 	@Type(value = ContextualMenuUpdate.class, name ="contextual-menu-update"),
 	@Type(value = CredentialIssuanceMessage.class, name ="credential-issuance"),
 	@Type(value = CredentialRequestMessage.class, name ="credential-request"),
+	@Type(value = CredentialReceptionMessage.class, name ="credential-reception"),
 	@Type(value = IdentityProofRequestMessage.class, name ="identity-proof-request"),
 	@Type(value = IdentityProofResultMessage.class, name ="identity-proof-result"),
 	@Type(value = IdentityProofSubmitMessage.class, name ="identity-proof-submit"),
@@ -35,7 +36,8 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 	@Type(value = ReceiptsMessage.class, name ="receipts"),
 	@Type(value = TextMessage.class, name ="text"),
 	@Type(value = InvitationMessage.class, name ="invitation"),
-	@Type(value = ProfileMessage.class, name ="profile")
+	@Type(value = ProfileMessage.class, name ="profile"),
+	@Type(value = TerminateConnectionMessage.class, name ="terminate-connection")
 })
 public abstract class BaseMessage implements Serializable {
 
