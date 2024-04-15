@@ -7,7 +7,7 @@ import jakarta.ws.rs.Produces;
 import io.twentysixty.sa.client.model.message.BaseMessage;
 import io.twentysixty.sa.client.model.message.IdMessage;
 
-@Path("")
+@Path("/v1")
 public interface MessageInterface { //cambiar void 
 
 	@POST

@@ -9,7 +9,8 @@ public class RequestedProofItem  implements Serializable {
 	private static final long serialVersionUID = -3420017005051480727L;
 	private UUID id;
 	private String type;
-
+	
+	private String description;
 	private String credentialDefinitionId;
 	private List<String> attributes;
 	public UUID getId() {
@@ -27,6 +28,12 @@ public class RequestedProofItem  implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 	public String getCredentialDefinitionId() {
 		return credentialDefinitionId;
 	}

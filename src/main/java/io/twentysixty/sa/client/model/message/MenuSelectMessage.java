@@ -13,6 +13,7 @@ public class MenuSelectMessage extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = 2315457851863067424L;
 	private List<MenuItemSelection> menuItems;
+	private String content;
 
 	public List<MenuItemSelection> getMenuItems() {
 		return menuItems;
@@ -21,4 +22,12 @@ public class MenuSelectMessage extends BaseMessage  implements Serializable {
 	public void setMenuItems(List<MenuItemSelection> menuItems) {
 		this.menuItems = menuItems;
 	}
+
+	public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

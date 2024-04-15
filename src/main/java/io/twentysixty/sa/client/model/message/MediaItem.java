@@ -19,10 +19,13 @@ public class MediaItem  implements Serializable {
 	private String uri;
 	private Ciphering ciphering;
 	private String preview;
+	private Integer width;
+	private Integer height;
 	private String duration;
 	private String title;
 	private String icon;
 	private String openingMode;
+	private String screenOrientaton;
 
 	public String getId() {
 		return id;
@@ -88,6 +91,22 @@ public class MediaItem  implements Serializable {
 		this.preview = preview;
 	}
 
+	public Integer getWidth() {
+		return width;
+	}
+
+	public void setWidth(Integer width) {
+		this.width = width;
+	}
+
+	public Integer getHeight() {
+		return height;
+	}
+
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
+
 	public String getDuration() {
 		return duration;
 	}
@@ -120,12 +139,19 @@ public class MediaItem  implements Serializable {
 		this.openingMode = openingMode;
 	}
 
+	public String getscreenOrientaton() {
+		return screenOrientaton;
+	}
+
+	public void setscreenOrientaton(String screenOrientaton) {
+		this.screenOrientaton = screenOrientaton;
+	}
+
 	@Override
 	public String toString() {
-		return "MediaItem [description=" + description + ", mimeType=" + mimeType + ", filename=" + filename
-				+ ", byteCount=" + byteCount + ", uri=" + uri + ", ciphering=" + ciphering + ", preview=" + preview
-				+ ", duration=" + duration + ", title=" + title + ", icon=" + icon + ", openingMode=" + openingMode
-				+ "]";
+		return "MediaItem [description=" + description + ", mimeType=" + mimeType + ", uri=" + uri
+				+ ", preview=" + preview + ", width=" + width + ", height=" + height + ", duration=" + duration
+				+ ", title=" + title + ", icon=" + icon + ", openingMode=" + openingMode + ", screenOrientaton=" + screenOrientaton + "]";
 	}
 
 }

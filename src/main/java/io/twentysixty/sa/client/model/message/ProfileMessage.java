@@ -12,6 +12,7 @@ public class ProfileMessage extends BaseMessage {
 
 	private String displayName;
 	private String displayImageUrl;
+	private String displayIconUrl;
 
     public String getDisplayName() {
         return displayName;
@@ -26,4 +27,11 @@ public class ProfileMessage extends BaseMessage {
         this.displayImageUrl = displayImageUrl;
     }
 
+    public String getDisplayIconUrl() {
+        return displayIconUrl;
+    }
+
+    public void setDisplayIconUrl(String displayIconUrl) {
+        this.displayIconUrl = displayIconUrl;
+    }
 }
