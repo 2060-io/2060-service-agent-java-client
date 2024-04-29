@@ -1,5 +1,6 @@
 package io.twentysixty.sa.client.jms;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -20,7 +21,7 @@ import io.twentysixty.sa.client.model.message.BaseMessage;
 import io.twentysixty.sa.client.util.JsonUtil;
 
 
-public abstract class AbstractProducer implements ProducerInterface {
+public abstract class AbstractProducer<M extends Serializable> implements ProducerInterface<M> {
 	
 	private Integer producerId = 0;
 	private Integer producerCount = 8;
@@ -108,7 +109,7 @@ public abstract class AbstractProducer implements ProducerInterface {
 		this.producerCount = producerCount;
 	}
 	
-	public void spool(BaseMessage sms, int attempt) throws Exception {
+	public void spool(M sms, int attempt) throws Exception {
     	
     	JMSProducer producer = null;
     	JMSContext context = null;
@@ -194,7 +195,7 @@ public abstract class AbstractProducer implements ProducerInterface {
 	}
 
 	@Override
-	public void sendMessage(BaseMessage message) throws Exception {
+	public void sendMessage(M message) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

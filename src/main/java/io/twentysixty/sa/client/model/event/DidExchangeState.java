@@ -31,6 +31,7 @@ public enum DidExchangeState  implements Serializable {
 	RESPONSE_RECEIVED("response-received"),
 	ABANDONED("abandoned"),
 	COMPLETED("completed"),
+	TERMINATED("terminated"),
 	
 	;
 	
@@ -57,6 +58,7 @@ public enum DidExchangeState  implements Serializable {
 		else if (index.equals("response-received")) return RESPONSE_RECEIVED;
 		else if (index.equals("abandoned")) return ABANDONED;
 		else if (index.equals("completed")) return COMPLETED;
+		else if (index.equals("terminated")) return TERMINATED;
 		else return null;
 		
 	}
