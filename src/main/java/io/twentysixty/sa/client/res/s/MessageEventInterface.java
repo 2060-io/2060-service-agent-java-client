@@ -9,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 import io.twentysixty.sa.client.model.event.MessageReceived;
 import io.twentysixty.sa.client.model.event.MessageStateUpdated;
 
-@Path("/v1")
 public interface MessageEventInterface {
 
 	@POST

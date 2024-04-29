@@ -1,8 +1,8 @@
 package io.twentysixty.sa.client.jms;
 
-import io.twentysixty.sa.client.model.message.BaseMessage;
+import java.io.Serializable;
 
-public interface ProducerInterface {
+public interface ProducerInterface<M extends Serializable> {
 
 	
 	public void setExDelay(Long exDelay);
@@ -10,7 +10,7 @@ public interface ProducerInterface {
 	public void setThreads(Integer threads);
 	public void setDebug(Boolean debug);
 	
-	public void sendMessage(BaseMessage message) throws Exception;
+	public void sendMessage(M message) throws Exception;
 	 
 	
 	 

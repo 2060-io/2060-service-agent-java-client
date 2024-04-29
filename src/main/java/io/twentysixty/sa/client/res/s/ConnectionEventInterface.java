@@ -8,7 +8,6 @@ import jakarta.ws.rs.core.Response;
 
 import io.twentysixty.sa.client.model.event.ConnectionStateUpdated;
 
-@Path("/v1")
 public interface ConnectionEventInterface {
 
 	@POST

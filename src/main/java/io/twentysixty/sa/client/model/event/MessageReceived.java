@@ -13,6 +13,7 @@ import io.twentysixty.sa.client.model.message.BaseMessage;
 public class MessageReceived extends Event  implements Serializable {
 	
 	
+	private static final long serialVersionUID = 8579005132408573827L;
 	private BaseMessage message;
 
 	public BaseMessage getMessage() {

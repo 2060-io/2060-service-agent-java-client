@@ -9,7 +9,6 @@ import jakarta.ws.rs.Produces;
 
 import io.twentysixty.sa.client.model.credential.CredentialType;
 
-@Path("/v1")
 public interface CredentialTypeInterface {
 
 	@POST

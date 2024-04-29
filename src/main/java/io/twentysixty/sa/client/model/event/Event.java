@@ -26,8 +26,10 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 
 })
 
-public class Event  implements Serializable {
+public class Event implements Serializable {
 	
+	private static final long serialVersionUID = -3403163200817960597L;
+
 	private String type;
 
 	@JsonSerialize(using = InstantSerializer.class)
