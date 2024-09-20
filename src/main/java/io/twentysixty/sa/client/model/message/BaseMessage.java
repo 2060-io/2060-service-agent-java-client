@@ -39,7 +39,7 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 	@Type(value = InvitationMessage.class, name ="invitation"),
 	@Type(value = ProfileMessage.class, name ="profile"),
 	@Type(value = TerminateConnectionMessage.class, name ="terminate-connection"),
-	@Type(value = CallOfferRequestMessage.class, name ="call-offer-request")
+	@Type(value = CallOfferRequestMessage.class, name ="call-offer")
 })
 public abstract class BaseMessage implements Serializable {
 
