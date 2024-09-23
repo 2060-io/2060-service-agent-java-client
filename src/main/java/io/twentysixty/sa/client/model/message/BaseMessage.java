@@ -14,7 +14,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.twentysixty.sa.client.model.message.calls.CallAcceptRequestMessage;
+import io.twentysixty.sa.client.model.message.calls.CallEndRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallOfferRequestMessage;
+import io.twentysixty.sa.client.model.message.calls.CallRejectRequestMessage;
 import io.twentysixty.sa.client.util.InstantDeserializer;
 import io.twentysixty.sa.client.util.InstantSerializer;
 
@@ -39,7 +42,10 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 	@Type(value = InvitationMessage.class, name ="invitation"),
 	@Type(value = ProfileMessage.class, name ="profile"),
 	@Type(value = TerminateConnectionMessage.class, name ="terminate-connection"),
-	@Type(value = CallOfferRequestMessage.class, name ="call-offer")
+	@Type(value = CallAcceptRequestMessage.class, name ="call-accept"),
+	@Type(value = CallEndRequestMessage.class, name ="call-end"),
+	@Type(value = CallOfferRequestMessage.class, name ="call-offer"),
+	@Type(value = CallRejectRequestMessage.class, name ="call-reject")
 })
 public abstract class BaseMessage implements Serializable {
 
