@@ -1,5 +1,7 @@
 package io.twentysixty.sa.client.model.message.calls;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -18,6 +20,6 @@ public class CallAcceptRequestMessage extends BaseMessage{
 
 	private static final long serialVersionUID = -2840211856886973682L;
 
-    private RequestedCallItem items;
+    private Map<String, Object> items;
     
 }
