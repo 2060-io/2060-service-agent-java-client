@@ -20,6 +20,6 @@ public class CallOfferRequestMessage extends BaseMessage{
 
 	private static final long serialVersionUID = -2840211856886973682L;
 
-    private Map<String, Object> items;
+    private Map<String, Object> parameters;
     
 }
