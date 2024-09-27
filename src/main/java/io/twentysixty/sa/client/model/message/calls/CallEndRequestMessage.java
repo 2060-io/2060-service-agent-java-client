@@ -14,7 +14,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class CallEndRequestMessage extends BaseMessage{
+public class CallEndRequestMessage extends BaseMessage {
 
 	private static final long serialVersionUID = -2840211856886973682L;
     
