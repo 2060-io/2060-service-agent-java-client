@@ -4,7 +4,7 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, ci/add-auto-pusblish ]
   workflow_dispatch:
   
 env:
