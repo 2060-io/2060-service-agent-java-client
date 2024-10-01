@@ -4,8 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Setter
+@Getter
 public class ProfileMessage extends BaseMessage {
 
 	private static final long serialVersionUID = 7632455409300337368L;
@@ -13,25 +18,7 @@ public class ProfileMessage extends BaseMessage {
 	private String displayName;
 	private String displayImageUrl;
 	private String displayIconUrl;
+	private String description;
+	private String preferredLanguage;
 
-    public String getDisplayName() {
-        return displayName;
-    }
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-    public String getDisplayImageUrl() {
-        return displayImageUrl;
-    }
-    public void setDisplayImageUrl(String displayImageUrl) {
-        this.displayImageUrl = displayImageUrl;
-    }
-
-    public String getDisplayIconUrl() {
-        return displayIconUrl;
-    }
-
-    public void setDisplayIconUrl(String displayIconUrl) {
-        this.displayIconUrl = displayIconUrl;
-    }
 }
