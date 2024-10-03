@@ -13,13 +13,13 @@ public class Tryme {
 
 	public static void main(String[] args) throws JsonProcessingException {
 		TextMessage textMessage = new TextMessage();
-		
+
 		textMessage.setConnectionId(UUID.randomUUID());
 		textMessage.setId(UUID.randomUUID());
 		textMessage.setThreadId(UUID.randomUUID());
 		textMessage.setTimestamp(Instant.now());
-		System.out.println(JsonUtil.serialize((BaseMessage)textMessage, true));
-		
+		System.out.println(JsonUtil.serialize((BaseMessage) textMessage, true));
+
 	}
 
 }

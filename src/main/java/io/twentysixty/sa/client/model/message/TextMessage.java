@@ -3,8 +3,7 @@ package io.twentysixty.sa.client.model.message;
 import java.io.Serializable;
 import java.util.UUID;
 
-
-public class TextMessage extends BaseMessage  implements Serializable {
+public class TextMessage extends BaseMessage implements Serializable {
 
 	private static final long serialVersionUID = -1511458961424773105L;
 	private String content;
@@ -33,9 +32,7 @@ public class TextMessage extends BaseMessage  implements Serializable {
 		textMessage.setId(UUID.randomUUID());
 		textMessage.setThreadId(threadId);
 
-
 		return textMessage;
-
 
 	}
 }

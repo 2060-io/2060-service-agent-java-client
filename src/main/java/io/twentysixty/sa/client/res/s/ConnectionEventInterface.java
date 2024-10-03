@@ -1,12 +1,11 @@
 package io.twentysixty.sa.client.res.s;
 
+import io.twentysixty.sa.client.model.event.ConnectionStateUpdated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
-
-import io.twentysixty.sa.client.model.event.ConnectionStateUpdated;
 
 public interface ConnectionEventInterface {
 

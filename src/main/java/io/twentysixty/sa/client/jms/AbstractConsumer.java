@@ -1,13 +1,17 @@
 package io.twentysixty.sa.client.jms;
 
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.jboss.logging.Logger;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import io.smallrye.mutiny.Uni;
+import io.twentysixty.sa.client.util.JsonUtil;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
@@ -16,42 +20,27 @@ import jakarta.jms.ObjectMessage;
 import jakarta.jms.Queue;
 import jakarta.jms.Session;
 
-import org.jboss.logging.Logger;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import io.smallrye.mutiny.Uni;
-import io.twentysixty.sa.client.model.message.BaseMessage;
-import io.twentysixty.sa.client.util.JsonUtil;
-
-
-public class AbstractConsumer<M> implements ConsumerInterface<M>  {
+public class AbstractConsumer<M> implements ConsumerInterface<M> {
 
 	private ConnectionFactory connectionFactory;
-
 
 	private Long exDelay;
 	private String queueName;
 	private Integer threads;
 	private Boolean debug;
 
-
-
 	private static final Logger logger = Logger.getLogger(AbstractConsumer.class);
 
-	private Map<UUID,Object> lockObjs = new HashMap<UUID,Object>();
-	private Map<UUID,Boolean> runnings = new HashMap<UUID,Boolean>();
-	private Map<UUID,Boolean> starteds = new HashMap<UUID,Boolean>();
-	private Map<UUID,JMSContext> contexts = new HashMap<UUID,JMSContext>();
-
+	private Map<UUID, Object> lockObjs = new HashMap<UUID, Object>();
+	private Map<UUID, Boolean> runnings = new HashMap<UUID, Boolean>();
+	private Map<UUID, Boolean> starteds = new HashMap<UUID, Boolean>();
+	private Map<UUID, JMSContext> contexts = new HashMap<UUID, JMSContext>();
 
 	private static ExecutorService executor = Executors.newCachedThreadPool();
 
-
 	protected void _onStart() {
 
-
-		for (int i=0; i<threads;i++) {
+		for (int i = 0; i < threads; i++) {
 			logger.info("onStart: starting consumer #" + i + " for " + queueName);
 			UUID uuid = UUID.randomUUID();
 
@@ -69,7 +58,6 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 
 		this.stopConsumers();
 
-
 	}
 
 	private void stopConsumers() {
@@ -80,8 +68,9 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 			keySet = lockObjs.keySet().toArray(new UUID[0]);
 		}
 
-		for (UUID uuid: keySet) {
-			if (debug) logger.info("stopConsumers: stopping consumer " + uuid + " for " + queueName);
+		for (UUID uuid : keySet) {
+			if (debug)
+				logger.info("stopConsumers: stopping consumer " + uuid + " for " + queueName);
 			setStoppedConsumer(uuid);
 
 			JMSContext context = null;
@@ -90,32 +79,29 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 				context = contexts.get(uuid);
 			}
 
-			
-			
 			if (context != null) {
-				if (debug) logger.info("stopConsumers: closing context " + uuid);
+				if (debug)
+					logger.info("stopConsumers: closing context " + uuid);
 				context.close();
 			}
 
-			if (debug) logger.info("stopConsumers: closing context done, calling stopConsumer " + uuid);
+			if (debug)
+				logger.info("stopConsumers: closing context done, calling stopConsumer " + uuid);
 			stopConsumer(uuid);
-			
-			if (debug) logger.info("stopConsumers: removing lockObj " + uuid);
-			
+
+			if (debug)
+				logger.info("stopConsumers: removing lockObj " + uuid);
+
 			synchronized (lockObjs) {
 				lockObjs.remove(uuid);
 			}
 
 		}
 	}
-	
-	
-	public void startConsumer(UUID uuid) {
-		Uni.createFrom().item(uuid).emitOn(executor).subscribe().with(
-				this::consumer, Throwable::printStackTrace
-				);
-	}
 
+	public void startConsumer(UUID uuid) {
+		Uni.createFrom().item(uuid).emitOn(executor).subscribe().with(this::consumer, Throwable::printStackTrace);
+	}
 
 	private static Object shutdownLockObj = new Object();
 
@@ -125,26 +111,18 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 			starteds.put(uuid, false);
 		}
 
-
 	}
-
 
 	public void stopConsumer(UUID uuid) {
 
-
-
-
 		Object lockObj = lockObjs.get(uuid);
-
-		
-
 
 		if (lockObj != null) {
 			synchronized (lockObj) {
 				try {
 					lockObj.notifyAll();
 				} catch (Exception e) {
-					logger.error("stopConsumer",e);
+					logger.error("stopConsumer", e);
 				}
 			}
 		}
@@ -172,7 +150,6 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 			}
 		}
 
-
 		logger.info("stopConsumer: stopped: " + uuid);
 
 	}
@@ -190,20 +167,16 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 			runnings.put(uuid, true);
 		}
 
-
 		long now = System.currentTimeMillis();
-		/*synchronized (lockObj) {
-			try {
-				lockObj.wait(10000l);
-			} catch (InterruptedException e) {
-
-			}
-		}
+		/*
+		 * synchronized (lockObj) { try { lockObj.wait(10000l); } catch (InterruptedException e) {
+		 *
+		 * } }
 		 */
 
 		while (true) {
 			Boolean started = null;
-			synchronized(starteds) { 
+			synchronized (starteds) {
 				started = starteds.get(uuid);
 
 			}
@@ -211,13 +184,13 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 				break;
 			}
 
+			if (debug)
+				logger.info("consumer: running " + uuid);
 
-			if (debug) logger.info("consumer: running " + uuid);
+			try {
 
-			try  {
-
-				if (debug) logger.info("consumer " + queueName + ": create session " + uuid );
-
+				if (debug)
+					logger.info("consumer " + queueName + ": create session " + uuid);
 
 				if (context == null) {
 					context = getConnectionFactory().createContext(Session.SESSION_TRANSACTED);
@@ -227,13 +200,14 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 
 				}
 
-
-				if (debug) logger.info("consumer " + queueName + ": session created " + uuid );
+				if (debug)
+					logger.info("consumer " + queueName + ": session created " + uuid);
 
 				if (queue == null) {
 					queue = context.createQueue(queueName);
 				}
-				if (debug) logger.info("consumer " + queueName + ": create consumer " + uuid );
+				if (debug)
+					logger.info("consumer " + queueName + ": create consumer " + uuid);
 				JMSConsumer consumer = null;
 				String messageSelector = getMessageSelector();
 
@@ -243,42 +217,39 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 					consumer = context.createConsumer(queue);
 				}
 
-
-
-				if (debug) logger.info("consumer " + queueName + ": waiting for message... " + uuid);
-
+				if (debug)
+					logger.info("consumer " + queueName + ": waiting for message... " + uuid);
 
 				while (true) {
 					started = null;
 
-					synchronized(starteds) { 
+					synchronized (starteds) {
 						started = starteds.get(uuid);
-						
+
 					}
 					if ((started == null) || (!started)) {
 						break;
 					}
 
-
 					now = System.currentTimeMillis();
 
-					if (debug) 
-						logger.info("consumer: waiting for message... " + uuid + " " + (System.currentTimeMillis() - now));
+					if (debug)
+						logger.info(
+								"consumer: waiting for message... " + uuid + " " + (System.currentTimeMillis() - now));
 
 					Message message = consumer.receive();
 
 					if (message != null) {
-						if (debug) 
-							logger.info("consumer: received message " + uuid + " " + (System.currentTimeMillis() - now));
+						if (debug)
+							logger.info(
+									"consumer: received message " + uuid + " " + (System.currentTimeMillis() - now));
 
-
-
-						//BaseMessage baseMessage = null;
+						// BaseMessage baseMessage = null;
 
 						if (message instanceof ObjectMessage) {
 
 							ObjectMessage objMsg = (ObjectMessage) message;
-							//baseMessage = (BaseMessage) objMsg.getObject();
+							// baseMessage = (BaseMessage) objMsg.getObject();
 
 							if (debug) {
 								try {
@@ -290,45 +261,50 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 							try {
 								M baseMessage = (M) objMsg.getObject();
 								this.receiveMessage(baseMessage);
-								//messageResource.sendMessage(baseMessage);
-
+								// messageResource.sendMessage(baseMessage);
 
 								context.commit();
-								if (debug) 
-									logger.info("consumer: " + queueName + " after commit "+ uuid + " " + (System.currentTimeMillis() - now));
-
+								if (debug)
+									logger.info("consumer: " + queueName + " after commit " + uuid + " "
+											+ (System.currentTimeMillis() - now));
 
 							} catch (Exception e) {
 								try {
-									logger.warn("consumer: " + queueName + " "+ uuid + " " + (System.currentTimeMillis() - now)+ ": exception " + JsonUtil.serialize(objMsg, false), e);
+									logger.warn("consumer: " + queueName + " " + uuid + " "
+											+ (System.currentTimeMillis() - now) + ": exception "
+											+ JsonUtil.serialize(objMsg, false), e);
 								} catch (JsonProcessingException e1) {
-									logger.warn("consumer: " + queueName + " "+ uuid + " " + (System.currentTimeMillis() - now)+ ": exception", e);
+									logger.warn("consumer: " + queueName + " " + uuid + " "
+											+ (System.currentTimeMillis() - now) + ": exception", e);
 								}
 								context.rollback();
-								//if (debug) 
-								logger.info("consumer: " + queueName + " after rollback "+ uuid + " " + (System.currentTimeMillis() - now));
+								// if (debug)
+								logger.info("consumer: " + queueName + " after rollback " + uuid + " "
+										+ (System.currentTimeMillis() - now));
 
-							} 
+							}
 						} else {
-							if (debug) logger.info("consumer " + queueName + " "+ uuid + " " + (System.currentTimeMillis() - now)+ ": unkown event " + message);
+							if (debug)
+								logger.info("consumer " + queueName + " " + uuid + " "
+										+ (System.currentTimeMillis() - now) + ": unkown event " + message);
 							context.commit();
 						}
 
-
-					}  else {
-						if (debug) 
-							logger.info("consumer: no delivered message " + uuid + " " + (System.currentTimeMillis() - now));
+					} else {
+						if (debug)
+							logger.info("consumer: no delivered message " + uuid + " "
+									+ (System.currentTimeMillis() - now));
 
 						synchronized (lockObj) {
 							try {
-								if (debug) logger.info("consumer: waiting thread " + uuid + " " + (System.currentTimeMillis() - now));
+								if (debug)
+									logger.info("consumer: waiting thread " + uuid + " "
+											+ (System.currentTimeMillis() - now));
 								lockObj.wait(1000);
 							} catch (InterruptedException e1) {
 							}
 						}
 					}
-
-
 
 				}
 				consumer.close();
@@ -336,7 +312,7 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 				consumer = null;
 				context = null;
 			} catch (Exception e) {
-				
+
 				logger.error("", e);
 				try {
 
@@ -346,8 +322,6 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 				}
 				context = null;
 				queue = null;
-
-
 
 				synchronized (lockObj) {
 					try {
@@ -397,12 +371,10 @@ public class AbstractConsumer<M> implements ConsumerInterface<M>  {
 	public void setConnectionFactory(ConnectionFactory connectionFactory) {
 		this.connectionFactory = connectionFactory;
 	}
+
 	@Override
 	public String getMessageSelector() {
 		return null;
 	}
-
-
-
 
 }

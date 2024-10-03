@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MenuDisplayMessage extends BaseMessage  implements Serializable {
+public class MenuDisplayMessage extends BaseMessage implements Serializable {
 
 	private static final long serialVersionUID = 815738354220531775L;
 
@@ -41,7 +41,7 @@ public class MenuDisplayMessage extends BaseMessage  implements Serializable {
 
 		if (this.getMenuItems() != null) {
 			List<MenuItem> cloneMenuItems = new ArrayList<>(this.getMenuItems().size());
-			for (MenuItem i: this.getMenuItems()) {
+			for (MenuItem i : this.getMenuItems()) {
 				MenuItem ci = new MenuItem();
 				ci.setAction(i.getAction());
 				ci.setId(i.getId());
@@ -53,8 +53,6 @@ public class MenuDisplayMessage extends BaseMessage  implements Serializable {
 		}
 
 		return clone;
-
-
 
 	}
 }

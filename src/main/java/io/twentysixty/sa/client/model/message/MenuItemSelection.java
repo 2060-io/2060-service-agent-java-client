@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MenuItemSelection  implements Serializable {
+public class MenuItemSelection implements Serializable {
 
 	private static final long serialVersionUID = -6326294105243347432L;
 	private String id;
@@ -20,6 +20,5 @@ public class MenuItemSelection  implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 }

@@ -19,5 +19,5 @@ public class MrzDataSubmitMessage extends BaseMessage {
 	private static final long serialVersionUID = -2840411856886673672L;
 
 	private MrzData mrzData;
-    
+
 }

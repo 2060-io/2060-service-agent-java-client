@@ -23,23 +23,23 @@ public class MrzData implements Serializable {
 	private static final long serialVersionUID = -5234275638176689315L;
 
 	private Object raw;
-    private ParsedData parsed;
+	private ParsedData parsed;
 
 	public String getRaw() {
-        if (raw instanceof List) {
-            return String.join(",", (List<String>) raw);
-        } else if (raw instanceof String) {
-            return (String) raw;
-        }
-        return null;
-    }
+		if (raw instanceof List) {
+			return String.join(",", (List<String>) raw);
+		} else if (raw instanceof String) {
+			return (String) raw;
+		}
+		return null;
+	}
 
 	@Getter
 	@Setter
 	@ToString
 	public static class ParsedData {
-        private Mrz.Format format;
-        private Map<Mrz.FieldName, String> fields;
-        private boolean valid;
-    }
+		private Mrz.Format format;
+		private Map<Mrz.FieldName, String> fields;
+		private boolean valid;
+	}
 }
