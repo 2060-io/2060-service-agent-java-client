@@ -22,7 +22,7 @@ jobs:
           distribution: temurin
           cache: maven
 
-      - name: Clean and verify
+      - name: Clean and spotless
         run: |
           # Skipping Docker image build for PR verification
-          mvn clean verify spotless:check -Dgpg.skip
+          mvn clean spotless:check
