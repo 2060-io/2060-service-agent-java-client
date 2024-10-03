@@ -5,7 +5,8 @@ Client tools for building Quarkus java DIDcomm Verifiable Credential powered con
 ## How to use
 On dev mode use the command `mvn clean verify install -Dgpg.skip` to run the project
 
-
+## Before PR
+Please run `mvn clean spotless:check` command before uploading changes to verify the syntax
 
 ## Releases
 
