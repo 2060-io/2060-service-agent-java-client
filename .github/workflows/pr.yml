@@ -25,4 +25,4 @@ jobs:
       - name: Clean and verify
         run: |
           # Skipping Docker image build for PR verification
-          mvn clean verify -Dgpg.skip
+          mvn clean verify spotless:check -Dgpg.skip
