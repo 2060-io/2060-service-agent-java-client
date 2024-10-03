@@ -18,6 +18,8 @@ import io.twentysixty.sa.client.model.message.calls.CallAcceptRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallEndRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallOfferRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallRejectRequestMessage;
+import io.twentysixty.sa.client.model.message.mrtd.MrzDataRequestMessage;
+import io.twentysixty.sa.client.model.message.mrtd.MrzDataSubmitMessage;
 import io.twentysixty.sa.client.util.InstantDeserializer;
 import io.twentysixty.sa.client.util.InstantSerializer;
 
@@ -45,7 +47,9 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 	@Type(value = CallAcceptRequestMessage.class, name ="call-accept"),
 	@Type(value = CallEndRequestMessage.class, name ="call-end"),
 	@Type(value = CallOfferRequestMessage.class, name ="call-offer"),
-	@Type(value = CallRejectRequestMessage.class, name ="call-reject")
+	@Type(value = CallRejectRequestMessage.class, name ="call-reject"),
+	@Type(value = MrzDataRequestMessage.class, name ="mrz-data-request"),
+	@Type(value = MrzDataSubmitMessage.class, name ="mrz-data-submit")
 })
 public abstract class BaseMessage implements Serializable {
 
