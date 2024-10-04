@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ContextualMenuRequest extends BaseMessage implements Serializable {
+public class ContextualMenuRequest extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = 6901833429017318747L;
 

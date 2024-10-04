@@ -10,7 +10,7 @@ import io.twentysixty.sa.client.model.event.CredentialReceptionState;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CredentialReceptionMessage extends BaseMessage implements Serializable {
+public class CredentialReceptionMessage extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = 9137654378945678321L;
 	private CredentialReceptionState state;
@@ -18,7 +18,6 @@ public class CredentialReceptionMessage extends BaseMessage implements Serializa
 	public CredentialReceptionState getState() {
 		return state;
 	}
-
 	public void setState(CredentialReceptionState state) {
 		this.state = state;
 	}

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MediaItem implements Serializable {
+public class MediaItem  implements Serializable {
 
 	private static final long serialVersionUID = -2718519112111712736L;
 	private String id;
@@ -149,9 +149,9 @@ public class MediaItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MediaItem [description=" + description + ", mimeType=" + mimeType + ", uri=" + uri + ", preview="
-				+ preview + ", width=" + width + ", height=" + height + ", duration=" + duration + ", title=" + title
-				+ ", icon=" + icon + ", openingMode=" + openingMode + ", screenOrientaton=" + screenOrientaton + "]";
+		return "MediaItem [description=" + description + ", mimeType=" + mimeType + ", uri=" + uri
+				+ ", preview=" + preview + ", width=" + width + ", height=" + height + ", duration=" + duration
+				+ ", title=" + title + ", icon=" + icon + ", openingMode=" + openingMode + ", screenOrientaton=" + screenOrientaton + "]";
 	}
 
 }

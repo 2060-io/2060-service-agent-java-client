@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ConnectionStateUpdated extends Event implements Serializable {
-
+public class ConnectionStateUpdated extends Event  implements Serializable {
+	
 	private static final long serialVersionUID = -2518124661250013725L;
 	private UUID connectionId;
 	private DidExchangeState state;
@@ -19,23 +19,18 @@ public class ConnectionStateUpdated extends Event implements Serializable {
 	public UUID getInvitationId() {
 		return invitationId;
 	}
-
 	public void setInvitationId(UUID invitationId) {
 		this.invitationId = invitationId;
 	}
-
 	public UUID getConnectionId() {
 		return connectionId;
 	}
-
 	public void setConnectionId(UUID connectionId) {
 		this.connectionId = connectionId;
 	}
-
 	public DidExchangeState getState() {
 		return state;
 	}
-
 	public void setState(DidExchangeState state) {
 		this.state = state;
 	}

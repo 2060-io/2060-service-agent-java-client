@@ -19,14 +19,15 @@ import io.twentysixty.sa.client.util.InstantSerializer;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
-@JsonSubTypes({@Type(value = ConnectionStateUpdated.class, name = "connection-state-updated"),
-		@Type(value = MessageStateUpdated.class, name = "message-state-updated"),
-		@Type(value = MessageReceived.class, name = "message-received"),
+@JsonSubTypes({
+@Type(value = ConnectionStateUpdated.class, name ="connection-state-updated"),
+@Type(value = MessageStateUpdated.class, name ="message-state-updated"),
+@Type(value = MessageReceived.class, name ="message-received"),
 
 })
 
 public class Event implements Serializable {
-
+	
 	private static final long serialVersionUID = -3403163200817960597L;
 
 	private String type;
@@ -34,7 +35,7 @@ public class Event implements Serializable {
 	@JsonSerialize(using = InstantSerializer.class)
 	@JsonDeserialize(using = InstantDeserializer.class)
 	private Instant timestamp;
-
+	
 	public String getType() {
 		return type;
 	}
@@ -50,5 +51,8 @@ public class Event implements Serializable {
 	public void setTimestamp(Instant timestamp) {
 		this.timestamp = timestamp;
 	}
+	
+	
+	
 
 }

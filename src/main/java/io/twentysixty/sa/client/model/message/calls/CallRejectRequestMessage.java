@@ -11,5 +11,5 @@ import io.twentysixty.sa.client.model.message.BaseMessage;
 public class CallRejectRequestMessage extends BaseMessage {
 
 	private static final long serialVersionUID = -2840211856886973682L;
-
+    
 }

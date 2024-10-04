@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IdentityProofRequestMessage extends BaseMessage implements Serializable {
+public class IdentityProofRequestMessage extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = 184932976790362365L;
 	private List<RequestedProofItem> requestedProofItems;

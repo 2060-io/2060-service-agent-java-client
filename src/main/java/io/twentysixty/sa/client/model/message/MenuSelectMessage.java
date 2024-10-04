@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MenuSelectMessage extends BaseMessage implements Serializable {
+public class MenuSelectMessage extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = 2315457851863067424L;
 	private List<MenuItemSelection> menuItems;
@@ -24,10 +24,10 @@ public class MenuSelectMessage extends BaseMessage implements Serializable {
 	}
 
 	public String getContent() {
-		return content;
-	}
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

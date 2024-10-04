@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ContextualMenuUpdate extends BaseMessage implements Serializable {
+public class ContextualMenuUpdate extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = 391973108938300769L;
 	private String title;
@@ -51,7 +51,7 @@ public class ContextualMenuUpdate extends BaseMessage implements Serializable {
 		if (options != null) {
 			List<ContextualMenuItem> clonedOptions = new ArrayList<>();
 
-			for (ContextualMenuItem i : options) {
+			for (ContextualMenuItem i: options) {
 				ContextualMenuItem ci = new ContextualMenuItem();
 				ci.setDescription(i.getDescription());
 				ci.setId(i.getId());

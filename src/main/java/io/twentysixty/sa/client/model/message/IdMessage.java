@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IdMessage implements Serializable {
+public class IdMessage  implements Serializable {
 
 	private static final long serialVersionUID = 8231578543615143747L;
 	private String id;

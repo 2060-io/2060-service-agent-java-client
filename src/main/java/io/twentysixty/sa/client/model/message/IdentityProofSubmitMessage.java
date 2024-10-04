@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IdentityProofSubmitMessage extends BaseMessage implements Serializable {
+public class IdentityProofSubmitMessage extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = -5772627818716475038L;
 	private List<SubmitProofItem> submittedProofItems;

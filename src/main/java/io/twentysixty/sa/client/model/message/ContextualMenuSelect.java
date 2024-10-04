@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ContextualMenuSelect extends BaseMessage implements Serializable {
+public class ContextualMenuSelect extends BaseMessage  implements Serializable {
+
 
 	private static final long serialVersionUID = -4666174067446573357L;
 	private String selectionId;

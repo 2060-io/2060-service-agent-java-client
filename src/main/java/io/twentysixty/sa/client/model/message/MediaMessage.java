@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MediaMessage extends BaseMessage implements Serializable {
+public class MediaMessage extends BaseMessage  implements Serializable {
 
 	private static final long serialVersionUID = -4859703743672351029L;
 	private String description;
