@@ -9,8 +9,8 @@ import jakarta.ws.rs.Produces;
 @Path("")
 public interface MessageInterface { // cambiar void
 
-	@POST
-	@Path("/v1/message")
-	@Produces("application/json")
-	public IdMessage sendMessage(BaseMessage message);
+  @POST
+  @Path("/v1/message")
+  @Produces("application/json")
+  public IdMessage sendMessage(BaseMessage message);
 }

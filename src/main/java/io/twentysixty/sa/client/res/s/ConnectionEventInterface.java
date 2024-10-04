@@ -9,9 +9,9 @@ import jakarta.ws.rs.core.Response;
 
 public interface ConnectionEventInterface {
 
-	@POST
-	@Path("/connection-state-updated")
-	@Produces("application/json")
-	@Consumes("application/json")
-	public Response connectionStateUpdated(ConnectionStateUpdated event);
+  @POST
+  @Path("/connection-state-updated")
+  @Produces("application/json")
+  @Consumes("application/json")
+  public Response connectionStateUpdated(ConnectionStateUpdated event);
 }
