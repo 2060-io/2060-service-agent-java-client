@@ -25,4 +25,4 @@ jobs:
       - name: Clean and spotless
         run: |
           # Skipping Docker image build for PR verification
-          mvn clean spotless:check
+          mvn clean fmt:check
