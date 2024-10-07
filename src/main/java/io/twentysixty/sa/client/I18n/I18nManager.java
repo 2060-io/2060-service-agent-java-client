@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 import org.eclipse.microprofile.config.ConfigProvider;
 
-public class InternationalizationService {
+public class I18nManager {
 
   private String defaultLanguage = "en";
   private List<String> messages = new ArrayList<>();
