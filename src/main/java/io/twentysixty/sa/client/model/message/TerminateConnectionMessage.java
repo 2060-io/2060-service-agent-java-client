@@ -8,6 +8,5 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TerminateConnectionMessage extends BaseMessage {
 
-	private static final long serialVersionUID = -2840211856886973672L;
-
+  private static final long serialVersionUID = -2840211856886973672L;
 }

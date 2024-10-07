@@ -1,47 +1,41 @@
 package io.twentysixty.sa.client.model.event;
 
-
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+public enum CredentialReceptionState implements Serializable {
 
-public enum CredentialReceptionState  implements Serializable {
+  /*
+   Done = "done",
+      Declined = "declined",
+      Abandoned = "abandoned",
+  */
 
-	/*
-	 Done = "done",
-     Declined = "declined",
-     Abandoned = "abandoned",
-	*/		  
-			
-	
-	DONE("done"),
-    DECLINED("declined"),
-    ABANDONED("abandoned");
-	
-	private CredentialReceptionState(String index){
-		this.index = index;
-	}
+  DONE("done"),
+  DECLINED("declined"),
+  ABANDONED("abandoned");
 
-	private String index;
+  private CredentialReceptionState(String index) {
+    this.index = index;
+  }
 
-	public String getIndex(){
-		return this.index;
-	}
+  private String index;
 
-	public static CredentialReceptionState getEnum(String index){
-		if (index == null)
-	return null;
+  public String getIndex() {
+    return this.index;
+  }
 
-		if (index.equals("done")) return DONE;
-		else if (index.equals("declined")) return DECLINED;
-        else if (index.equals("abandoned")) return ABANDONED;
-		else return null;
-		
-	}
-	
-	@JsonValue 
-	public String getValue() {
-		return index;
-	}
-			  
+  public static CredentialReceptionState getEnum(String index) {
+    if (index == null) return null;
+
+    if (index.equals("done")) return DONE;
+    else if (index.equals("declined")) return DECLINED;
+    else if (index.equals("abandoned")) return ABANDONED;
+    else return null;
+  }
+
+  @JsonValue
+  public String getValue() {
+    return index;
+  }
 }
