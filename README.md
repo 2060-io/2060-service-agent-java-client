@@ -10,7 +10,7 @@ Client tools for building Quarkus java DIDcomm Verifiable Credential powered con
 
 | Version | Release Date | Type of Change      | Description                                                                 |
 |---------|--------------|---------------------|-----------------------------------------------------------------------------|
-| 2.0.11     | 2024-10-04   | Patch  | - add I18n library                |
+| 2.0.11     | 2024-10-04   | Patch  | - add I18n manager                |
 | 2.0.10     | 2024-10-02   | Patch  | - add mrz message parameters                |
 | 2.0.9     | 2024-10-01   | Patch  | - add profile message parameters                |
 | 2.0.8     | 2024-09-27   | Patch      | - add call's command      |
