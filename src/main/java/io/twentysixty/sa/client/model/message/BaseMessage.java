@@ -13,6 +13,8 @@ import io.twentysixty.sa.client.model.message.calls.CallAcceptRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallEndRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallOfferRequestMessage;
 import io.twentysixty.sa.client.model.message.calls.CallRejectRequestMessage;
+import io.twentysixty.sa.client.model.message.mrtd.EMrtdDataRequestMessage;
+import io.twentysixty.sa.client.model.message.mrtd.EMrtdDataSubmitMessage;
 import io.twentysixty.sa.client.model.message.mrtd.MrzDataRequestMessage;
 import io.twentysixty.sa.client.model.message.mrtd.MrzDataSubmitMessage;
 import io.twentysixty.sa.client.util.InstantDeserializer;
@@ -47,7 +49,9 @@ import java.util.UUID;
   @Type(value = CallOfferRequestMessage.class, name = "call-offer"),
   @Type(value = CallRejectRequestMessage.class, name = "call-reject"),
   @Type(value = MrzDataRequestMessage.class, name = "mrz-data-request"),
-  @Type(value = MrzDataSubmitMessage.class, name = "mrz-data-submit")
+  @Type(value = MrzDataSubmitMessage.class, name = "mrz-data-submit"),
+  @Type(value = EMrtdDataRequestMessage.class, name = "emrtd-data-request"),
+  @Type(value = EMrtdDataSubmitMessage.class, name = "emrtd-data-submit")
 })
 public abstract class BaseMessage implements Serializable {
 
