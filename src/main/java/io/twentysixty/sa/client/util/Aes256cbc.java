@@ -1,6 +1,10 @@
 package io.twentysixty.sa.client.util;
 
+import io.twentysixty.sa.client.model.message.Ciphering;
+import io.twentysixty.sa.client.model.message.Parameters;
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import org.jboss.logging.Logger;
@@ -39,5 +43,22 @@ public class Aes256cbc {
     cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
     byte[] decrypted = cipher.doFinal(encrypted);
     return decrypted;
+  }
+
+  public static Ciphering randomCipheringData() throws Exception {
+    Ciphering c = new Ciphering();
+    Parameters p = new Parameters();
+    p.setKey(randomKey(32));
+    p.setIv(randomKey(16));
+    c.setAlgorithm(cI);
+    c.setParameters(p);
+    return c;
+  }
+
+  private static String randomKey(int size) throws Exception {
+    KeyGenerator keyGen = KeyGenerator.getInstance(alg);
+    keyGen.init(size * 8);
+    SecretKey secretKey = keyGen.generateKey();
+    return ISOUtil.dumpString(secretKey.getEncoded());
   }
 }
