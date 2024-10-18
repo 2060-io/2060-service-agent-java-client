@@ -1,11 +1,12 @@
 # Changelog
 
-## [2.0.12](https://central.sonatype.com/artifact/io.2060/service-agent-java-client/2.0.12) (2024-10-11)
+## [2.0.12](https://central.sonatype.com/artifact/io.2060/service-agent-java-client/2.0.12) (2024-10-18)
 
 
 ### Features
 
-* Add eMRTD commands to NFC reading ([a0bc1a4]())
+* Add eMRTD commands to NFC reading ([55b7937](https://github.com/2060-io/2060-service-agent-java-client/pull/19/commits/55b79378c9416c8b1aee6f98e2ee3eb29d268fbb))
+* Add randomCipheringData method ([c7d85f5](https://github.com/2060-io/2060-service-agent-java-client/pull/19/commits/c7d85f5c80f890c9c8c0cc8b2cf54fb5d09ef6b2))
 
 ## [2.0.11](https://central.sonatype.com/artifact/io.2060/service-agent-java-client/2.0.11) (2024-10-07)
 
