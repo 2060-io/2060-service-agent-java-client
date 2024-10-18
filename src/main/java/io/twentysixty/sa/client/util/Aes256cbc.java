@@ -59,6 +59,6 @@ public class Aes256cbc {
     KeyGenerator keyGen = KeyGenerator.getInstance(alg);
     keyGen.init(size * 8);
     SecretKey secretKey = keyGen.generateKey();
-    return ISOUtil.dumpString(secretKey.getEncoded());
+    return ISOUtil.hexString(secretKey.getEncoded());
   }
 }
