@@ -13,9 +13,9 @@ public class EMrtdDataRequestMessage extends BaseMessage {
   private static final long serialVersionUID = -2840211856886673672L;
 
   public static EMrtdDataRequestMessage build(UUID connectionId, UUID threadId) {
-    EMrtdDataRequestMessage mrzr = new EMrtdDataRequestMessage();
-    mrzr.setConnectionId(connectionId);
-    mrzr.setThreadId(threadId);
-    return mrzr;
+    EMrtdDataRequestMessage emrtd = new EMrtdDataRequestMessage();
+    emrtd.setConnectionId(connectionId);
+    emrtd.setThreadId(threadId);
+    return emrtd;
   }
 }
