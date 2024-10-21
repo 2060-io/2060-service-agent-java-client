@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import io.twentysixty.sa.client.model.message.BaseMessage;
-import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,5 +17,5 @@ public class EMrtdDataSubmitMessage extends BaseMessage {
 
   private static final long serialVersionUID = -2840411856886673672L;
 
-  private Map<String, Object> dataGroups;
+  private EMrtdData dataGroups;
 }
