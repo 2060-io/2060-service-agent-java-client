@@ -37,24 +37,18 @@ public class ParsedEMrtdData {
   }
 
   public String getImageType(Object image) {
-    if (image instanceof DecodedImage) {
-        return getMimeType(((DecodedImage) image).getImageType());
-    } else if (image instanceof DecodedFingerprint) {
-        return getMimeType(((DecodedFingerprint) image).getFingerImageType());
+    if (image instanceof DecodedImage
+            && ((DecodedImage) image).getImageType() == ImageType.JPEG2000.getValue()
+        || image instanceof DecodedFingerprint
+            && ((DecodedFingerprint) image).getImageType()
+                == FingerprintImageType.JPEG2000.getValue()) {
+      return "image/jp2";
+    } else if (image instanceof DecodedFingerprint
+        && ((DecodedFingerprint) image).getImageType() == FingerprintImageType.PNG.getValue()) {
+      return "image/png";
     }
     return "image/jpg";
-}
-
-private String getMimeType(Object imageType) {
-    if (imageType instanceof FingerprintImageType && imageType == FingerprintImageType.JPEG2000
-        || imageType instanceof ImageType && imageType == ImageType.JPEG2000) {
-        return "image/jp2";
-    } else if (imageType instanceof FingerprintImageType && imageType == FingerprintImageType.PNG) {
-        return "image/png";
-    }
-    return "image/jpg";
-}
-
+  }
 
   public List<byte[]> getFingerprintsAsBytes() {
     return convertToBytesList(fingerprints, DecodedFingerprint::getImageData);
@@ -151,11 +145,11 @@ enum ImageType {
   private final int value;
 
   ImageType(int value) {
-      this.value = value;
+    this.value = value;
   }
 
   public int getValue() {
-      return value;
+    return value;
   }
 }
 
@@ -169,17 +163,15 @@ enum FingerprintImageType {
   PNG(5);
 
   private final int value;
+
   FingerprintImageType(int value) {
-      this.value = value;
+    this.value = value;
   }
 
   public int getValue() {
-      return value;
+    return value;
   }
-
 }
-
-
 
 @Getter
 @Setter
@@ -216,7 +208,6 @@ class DecodedFingerprint extends AbstractBioTemplate {
   private int fingerType;
   // Image Data Type
   private int imageType;
-
 }
 
 @Getter
