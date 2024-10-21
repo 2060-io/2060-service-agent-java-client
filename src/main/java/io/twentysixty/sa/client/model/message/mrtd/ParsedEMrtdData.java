@@ -33,7 +33,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  abstract class AbstractBioTemplate {
+  abstract static class AbstractBioTemplate {
     // Standart Biometric Header. Described by ICAO 9303 p.10 section 4.7.2.1
     private Map<String, Object> sbh;
     // Length of record
@@ -65,7 +65,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedCom {
+  public static class DecodedCom {
     // Version of LDS structure
     private String ldsVersion;
     // Version of Unicode table
@@ -78,7 +78,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedImage extends AbstractBioTemplate {
+  public static class DecodedImage extends AbstractBioTemplate {
     // Number of facial images
     private int numberOfFacialImages;
     // Length of facial record data
@@ -155,7 +155,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedFingerprint extends AbstractBioTemplate {
+  public static class DecodedFingerprint extends AbstractBioTemplate {
     // ID of the biometric scanner
     private int captureDeviceId;
     // Level of image acquisition settings
@@ -198,7 +198,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedIris extends AbstractBioTemplate {
+  public static class DecodedIris extends AbstractBioTemplate {
     // ID of Biometric scanner (by manufacturer)
     private int captureDeviceId;
     // Bit field of image properties. ISO/IEC 19794-6, table 2
@@ -225,7 +225,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedAdditionalPersonalData {
+  public static class DecodedAdditionalPersonalData {
     // Full name of document holder
     private String nameOfHolder;
     // Other names of document holder
@@ -258,7 +258,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedAdditionalDocumentData {
+  public static class DecodedAdditionalDocumentData {
     // Full date of issue (YYYYMMDD)
     private int dateOfIssue;
     // Issuing authority
@@ -283,7 +283,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DecodedSecurtyObjectOfDocument {
+  public static class DecodedSecurtyObjectOfDocument {
     // Included certificates (ex. Document Signer Certificate)
     private List<Object> certificates;
     // LDS object with datagroup's hashes
@@ -296,7 +296,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public class CSCAMasterList {
+  public static class CSCAMasterList {
     /** Master list version */
     private int version;
 
@@ -308,7 +308,7 @@ public class ParsedEMrtdData {
   @Setter
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  class Buffer {
+  static class Buffer {
     private String type;
     private byte[] data;
   }
