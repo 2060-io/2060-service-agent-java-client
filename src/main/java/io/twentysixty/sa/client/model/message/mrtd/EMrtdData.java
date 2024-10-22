@@ -19,15 +19,30 @@ public class EMrtdData implements Serializable {
   private static final long serialVersionUID = -5234275638176689315L;
 
   private Map<String, Object> raw;
-  private ParsedData parsed;
+  private EMrtdProcessedData processed;
 
   @Getter
   @Setter
   @ToString
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class ParsedData {
-    private ParsedEMrtdData fields;
-    private boolean valid;
+  public static class EMrtdProcessedData {
+    private ProcessedData fields;
+  }
+
+  @Getter
+  @Setter
+  @ToString
+  @JsonInclude(Include.NON_NULL)
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class ProcessedData {
+    private String mrzData;
+    private String firstName;
+    private String lastName;
+    private String faceDataUrl;
+    private String fingerprintDataUrl;
+    private long birthDate;
+    private String placeOfBirth;
+    private long issuanceDate;
   }
 }
