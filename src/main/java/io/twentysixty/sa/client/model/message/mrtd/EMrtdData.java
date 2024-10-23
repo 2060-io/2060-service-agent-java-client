@@ -28,17 +28,6 @@ public class EMrtdData implements Serializable {
   @JsonInclude(Include.NON_NULL)
   @JsonIgnoreProperties(ignoreUnknown = true)
   public static class EMrtdProcessedData {
-    private EF_DG1 ef_dg1;
-    private EF_DG2 ef_dg2;
-    private EF_DG11 ef_dg11;
-  }
-
-  @Getter
-  @Setter
-  @ToString
-  @JsonInclude(Include.NON_NULL)
-  @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class EF_DG1 {
     private String documentType;
     private String documentNumber;
     private String issuingState;
@@ -48,27 +37,9 @@ public class EMrtdData implements Serializable {
     private String nationality;
     private String lastName;
     private String firstName;
-    private String nameOfHolder;
     private String mrzOptionalData;
-  }
-
-  @Getter
-  @Setter
-  @ToString
-  @JsonInclude(Include.NON_NULL)
-  @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class EF_DG2 {
     private List<String> faceImages;
-  }
-
-  @Getter
-  @Setter
-  @ToString
-  @JsonInclude(Include.NON_NULL)
-  @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class EF_DG11 {
     private String nameOfHolder;
-    private Long dateOfBirth;
     private List<String> otherNames;
     private String personalNumber;
     private List<String> placeOfBirth;
